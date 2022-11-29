@@ -1,0 +1,50 @@
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.navbar{
+
+    height: 70px;
+    box-shadow: 0 4px 10px black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}
+
+.navbar li{
+    display: inline-block;
+    font-size: 20px ;
+    margin-right: 75px;
+
+}
+
+.logo{
+    margin-left: 40px;
+    height: 55px;
+}
+
+.navbar li a{
+    color: black;
+}
+.navbar li a:hover{
+    color: coral;
+}
+
+body{
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="blocks/headParams :: headParams">
+<body>
+<div th:fragment="header">
+  <nav class="navbar">
+    <div class="">
+      <img th:src="@{/images/T_eng.svg}" alt="logo" class="logo" src="../static/images/T_eng.svg">
+    </div>
+
+    <div class="menu">
+      <ul>
+        <li><a href="/rooms">Номера</a></li>
+        <li><a href="/myOrders">Мои заказы</a></li>
+        <li><a href="/manager/Reply">Заказы на бронирование</a></li>
+
+        <li>
+          <form th:action="@{/logout}" th:method="POST">
+            <input type="submit" value="Logout" class="btn-warning"/>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container">
+
+  <h2>История заказов</h2>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Номер комнаты</th>
+      <th scope="col">Состояние заказа</th>
+      <th scope="col">Состояние заказа</th>
+      <th scope="col">Действия</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <div th:each="el : ${items}">
+      <tr>
+        <th scope="row" th:text="${el.id}"></th>
+        <td th:text="${el.getRoomId()}"></td>
+        <td th:text="${el.getState()}"></td>
+        <td th:text="${el.getPayState()}"></td>
+        <td>
+          <form  th:action="@{'/manager/' + ${el.getId()} + '/confirm'}"  th:method="PUT">
+            <input type="submit" value="confirm" class="btn btn-warning">
+          </form>
+          <br>
+          <form  th:action="@{'/manager/' + ${el.getId()} + '/disable'}"  th:method="PUT">
+            <input type="submit" value="disable" class="btn btn-danger">
+          </form>
+        </td>
+      </tr>
+    </div>
+    </tbody>
+  </table>
+
+
+
+
+
+</div>
+
+
+</body>
+</html>

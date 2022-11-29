@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:insert="blocks/headParams :: headParams">
+</head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Главная страница лучшей ТурФирмы</h1>
+            <p class="lead text-muted">На данной странице вы можете выбрать номер под ваши нужды, а так же посмотреть список гостиниц в которых расположены эти номера.</p>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                <div th:each="el : ${rooms}">
+                    <div class="col">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" style="height: 225px; width: 100%; display: block;" th:src="@{'/images/room-' + ${el.getRandomImg()} +'.jpg'}" data-holder-rendered="true">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <p>Информация о номере:</p>
+                                    <li>Краткое описание: <span th:text="${el.name}"></span></li>
+                                    <li>Площадь: <span th:text="${el.square}" ></span>m²</li>
+                                    <li>Стоимость сутки: <span th:text="${el.price}"></span>₽</li>
+                                    <li>Кол-во персон: <span th:text="${el.bedCount}"></span></li>
+                                    <li>Отель: <span th:text="${el.hotelName}"></span></li>
+
+                                </p>
+                                <div class="d-flex">
+
+
+                                    <form th:method="POST" th:action="@{'/rooms/' + ${el.getId()} + '/bron'}"  >
+                                        <input type="submit" value="Бронь" class="btn btn-sm btn-outline-secondary">
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <br><br><br>
+
+
+            <h2>Список гостиниц с описанием</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Класс</th>
+                    <th scope="col">Рейтинг</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div th:each="el : ${hotels}">
+                    <tr>
+                        <th scope="row" th:text="${el.id}"></th>
+                        <td th:text="${el.name}"></td>
+                        <td th:text="${el.address}"></td>
+                        <td th:text="${el.starsType}"></td>
+                        <td th:text="${el.rating}"></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+</main>
+</body>

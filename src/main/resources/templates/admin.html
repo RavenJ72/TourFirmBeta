@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="blocks/headParams :: headParams">
+
+<body>
+<header th:insert="blocks/adminHeader :: adminHeader"></header>
+
+
+
+
+<div class="container">
+
+    <h2 class="align-content-center">Список номеров</h2>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Площадь</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Кол-во кроватей</th>
+            <th scope="col">Отель</th>
+            <th scope="col">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <div th:each="el : ${rooms}">
+            <tr>
+                <th scope="row" th:text="${el.id}"></th>
+
+                <td th:text="${el.name}"></td>
+                <td th:text="${el.square}"></td>
+                <td th:text="${el.price}"></td>
+                <td th:text="${el.bedCount}"></td>
+                <td th:text="${el.hotelName}"></td>
+                <td>
+                    <form  th:action="@{'/admin/rooms/' + ${el.getId()} + '/delete'}"  th:method="DELETE">
+
+                        <input type="submit" value="delete" class="btn btn-danger">
+
+                    </form>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+    <button class="btn btn-warning"><a th:href="'/admin/newRoom'">Добавить номер</a></button><br><br>
+
+    <h2 class="align-content-center">Список гостиниц</h2>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Класс</th>
+            <th scope="col">Рейтинг</th>
+            <th scope="col">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="el : ${hotels}">
+            <tr>
+                <th scope="row" th:text="${el.id}"></th>
+                <td th:text="${el.name}"></td>
+                <td th:text="${el.address}"></td>
+                <td th:text="${el.starsType}"></td>
+                <td th:text="${el.rating}"></td>
+                <td>
+                    <form  th:action="@{'/admin/hotels/' + ${el.getId()} + '/delete'}"  th:method="DELETE">
+                        <input type="submit" value="delete" class="btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+    <button class="btn btn-warning"><a th:href="'/admin/newHotel'">Добавить гостиницу</a></button><br><br>
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

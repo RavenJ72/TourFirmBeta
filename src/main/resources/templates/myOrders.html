@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="blocks/headParams :: headParams">
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container">
+
+    <h2>История заказов</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Номер комнаты</th>
+            <th scope="col">Состояние заказа</th>
+            <th scope="col">Состояние оплаты</th>
+            <th scope="col">сообщение</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="el : ${items}">
+            <tr>
+                <th scope="row" th:text="${el.id}"></th>
+                <td th:text="${el.getRoomId()}"></td>
+                <td th:text="${el.getState()}"></td>
+                <td th:text="${el.getPayState()}"></td>
+                <td th:if="${el.getPayState().equalsIgnoreCase('не оплачен')}">
+
+                    <form  th:action="@{'/order/' + ${el.getId()} + '/pay'}"  th:method="GET">
+                        <input type="submit" value="Оплатить" class="btn btn-warning">
+                    </form>
+
+                </td>
+                <td th:text="${'Номер уже оплачен!'}"   th:if="${el.getPayState().equalsIgnoreCase('оплачен')}"></td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+</div>
+
+
+</body>
+</html>

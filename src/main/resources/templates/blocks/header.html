@@ -1,0 +1,24 @@
+<div th:fragment="header">
+  <nav class="navbar">
+    <div class="">
+      <img th:src="@{/images/T_eng.svg}" alt="logo" class="logo" src="../static/images/T_eng.svg">
+    </div>
+
+    <div class="menu">
+      <ul>
+
+
+        <li><a href="/rooms">Номера</a></li>
+        <li><a href="/myOrders">Мои заказы</a></li>
+
+        <li>
+          <form th:action="@{/logout}" th:method="POST">
+            <input type="submit" value="Logout" class="btn-warning"/>
+          </form>
+        </li>
+
+
+      </ul>
+    </div>
+  </nav>
+</div>
